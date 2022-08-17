@@ -1,0 +1,11 @@
+18/01/2022 12:39:08
+START REST API CALL
+===========
+FIRST API CALL
+===========
+404
+SECOND API CALL
+===========
+404
+
+END REST API CALL

@@ -1,0 +1,25 @@
+---
+- name: IOS facts
+  hosts: CSR1kv
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Collect information about IOS version and L3 interfaces
+      ios_command:
+        commands:
+          - show version
+          - show interfaces
+      register: output
+
+    - name: Configure the logging buffer with a size of 5000 bytes
+      ios_logging:
+        dest: buffered
+        size: 5000
+      
+    - name: SAVE OUTPUT ./ios_facts_folder/
+      copy:
+        content: "{{ output.stdout | replace('\\n', '\n') }}"
+        dest: "ios_facts_folder/ios_facts_{{ inventory_hostname }}.txt"
+
+
